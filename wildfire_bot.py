@@ -116,22 +116,26 @@ async def check_fires():
                         description=fire["title"],
                         color=0xFF4500
                     )
+
                     embed.add_field(name="Source", value=fire["source"], inline=False)
                     embed.add_field(name="More Info", value=fire["link"], inline=False)
 
-                    await channel.send(embed=embed)
+                    if channel:
+                        await channel.send(embed=embed)
 
         except Exception as e:
             print("Main Loop Error:", e)
 
         await asyncio.sleep(CHECK_INTERVAL)
 
+
 @client.event
 async def on_ready():
     print(f"Bot logged in as {client.user}")
     client.loop.create_task(check_fires())
-    
-    @client.event
+
+
+@client.event
 async def on_message(message):
     if message.author == client.user:
         return
@@ -142,10 +146,7 @@ async def on_message(message):
             description="Manual system test successful.",
             color=0xFF4500
         )
-
-        embed.add_field(name="Source", value="System Test", inline=False)
-        embed.add_field(name="Location", value="Hood River County", inline=False)
-
         await message.channel.send(embed=embed)
+
 
 client.run(TOKEN)
