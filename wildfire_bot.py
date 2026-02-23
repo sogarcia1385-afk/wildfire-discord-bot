@@ -17,6 +17,7 @@ EXCLUDE_KEYWORDS = ["prescribed","rx","training","pile"]
 announced = set()
 
 intents = discord.Intents.default()
+intents.message_content = True
 client = discord.Client(intents=intents)
 
 # --------------- HELPER FUNCTIONS ------------------
