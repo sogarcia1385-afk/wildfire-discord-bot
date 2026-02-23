@@ -120,14 +120,14 @@ async def check_fires():
                     embed.add_field(name="Source", value=fire["source"], inline=False)
                     embed.add_field(name="More Info", value=fire["link"], inline=False)
 
-                    if channel:
-                       role = discord.utils.get(channel.guild.roles, name="NEWSTARTNOTIFIED")
+        if channel:
+            role = discord.utils.get(channel.guild.roles, name="NEWSTARTNOTIFIED")
 
-if role:
-    await channel.send(f"{role.mention}", embed=embed)
-else:
-    print("Role NEWSTARTNOTIFIED not found")
-    await channel.send(embed=embed)
+            if role:
+                await channel.send(f"{role.mention}", embed=embed)
+            else:
+                print("Role NEWSTARTNOTIFIED not found")
+                await channel.send(embed=embed)
 
         except Exception as e:
             print("Main Loop Error:", e)
