@@ -1,0 +1,1 @@
+worker: python wildfire_bot.py
