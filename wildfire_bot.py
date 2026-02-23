@@ -130,5 +130,22 @@ async def check_fires():
 async def on_ready():
     print(f"Bot logged in as {client.user}")
     client.loop.create_task(check_fires())
+    
+    @client.event
+async def on_message(message):
+    if message.author == client.user:
+        return
+
+    if message.content.lower() == "!testfire":
+        embed = discord.Embed(
+            title="🔥 TEST WILDFIRE ALERT",
+            description="Manual system test successful.",
+            color=0xFF4500
+        )
+
+        embed.add_field(name="Source", value="System Test", inline=False)
+        embed.add_field(name="Location", value="Hood River County", inline=False)
+
+        await message.channel.send(embed=embed)
 
 client.run(TOKEN)
